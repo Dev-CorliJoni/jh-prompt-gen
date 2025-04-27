@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-gen-jh-prompt.py
+jh-gen-prompt.py
 
 Collect code via copy-jh-clipboard.py and build a ChatGPT prompt from a template.
 Templates are defined in .jhpromptconfig under `default_prompt_pattern` or named patterns.
 
 Examples:
-  gen-jh-prompt.py path/to/dir "Implement feature X"
-  gen-jh-prompt.py path/to/file "Add logging" -i '*.pyc' -I ignore.txt -p pattern_1
+  jh-gen-prompt path/to/dir "Implement feature X"
+  jh-gen-prompt.py path/to/file "Add logging" -i '*.pyc' -I ignore.txt -p pattern_1
 
 Placeholders available by default:
   {code}     - the captured code
@@ -83,8 +83,8 @@ def main() -> None:
       gen-jh-prompt.py <path> <feature> [-i PATTERN]... [-I IGNORE_FILE] [-c CONFIG_FILE] [-f KEY=VAL]... [--pattern NAME]
     """
     parser = argparse.ArgumentParser(
-        prog='gen-jh-prompt.py',
-        description='Generate a ChatGPT prompt using code and a named template.',
+        prog='jh-gen-prompt',
+        description='Easily generate great LLM prompts including code and a named template.',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument('path', help='File or directory for code capture')
@@ -126,7 +126,7 @@ def main() -> None:
     try:
         proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error running copy-jh-clipboard.py: {e.stderr}", file=sys.stderr)
+        print(f"Error running jh-copy-clipboard: {e.stderr}", file=sys.stderr)
         sys.exit(1)
     code = proc.stdout
 

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-copy-jh-clipboard.py
+jh-copy-clipboard.py
 
 Copy file(s) or directory contents to clipboard or stdout with headers and indentation.
 Supports ignore patterns via a .jhclipignore file or custom ignore file.
 Default ignore patterns include common binary extensions (*.png, *.jpg, etc).
 
 Examples:
-  copy-jh-clipboard.py path/to/file
-  copy-jh-clipboard.py path/to/dir -i '*.pyc' -i 'node_modules/'
-  copy-jh-clipboard.py path/to/dir -I custom_ignore.txt --return
+  jh-copy-clipboard.py path/to/file
+  jh-copy-clipboard.py path/to/dir -i '*.pyc' -i 'node_modules/'
+  jh-copy-clipboard.py path/to/dir -I custom_ignore.txt --return
 """
 import argparse
 import os
@@ -21,6 +21,7 @@ from typing import List
 # Banner width for separators
 BANNER_WIDTH = 80
 
+
 def make_banner(text: str, width: int = BANNER_WIDTH, char: str = '-') -> str:
     """
     Center `text` in a line of repeated `char` of total length `width`.
@@ -31,6 +32,7 @@ def make_banner(text: str, width: int = BANNER_WIDTH, char: str = '-') -> str:
     left = pad // 2
     right = pad - left
     return f"{char * left}{label}{char * right}"
+
 
 def should_exclude(rel_path: str, patterns: List[str]) -> bool:
     """
@@ -50,6 +52,7 @@ def should_exclude(rel_path: str, patterns: List[str]) -> bool:
         if pat.endswith('/') and norm.startswith(pat.rstrip('/') + '/'):
             return True
     return False
+
 
 def read_file_output(path: str, base: str, patterns: List[str]) -> List[str]:
     """
@@ -71,6 +74,7 @@ def read_file_output(path: str, base: str, patterns: List[str]) -> List[str]:
         out.append(f"Error reading {path}: {e}\n")
     out.append("\n")
     return out
+
 
 def process_dir(dir_path: str, base: str, patterns: List[str], out: List[str]) -> None:
     """
@@ -99,12 +103,13 @@ def process_dir(dir_path: str, base: str, patterns: List[str], out: List[str]) -
                     del futures[fut]
                     break
 
+
 def main() -> None:
     """
     Parse CLI args, collect files, then copy to clipboard or print to stdout.
     """
     parser = argparse.ArgumentParser(
-        prog='copy-jh-clipboard.py',
+        prog='jh-copy-clipboard',
         description='Copy file or directory contents with banners.',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
@@ -149,6 +154,7 @@ def main() -> None:
         print(text)
     else:
         pyperclip.copy(text)
+
 
 if __name__ == '__main__':
     main()
