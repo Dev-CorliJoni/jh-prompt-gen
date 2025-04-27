@@ -1,6 +1,6 @@
 [project]
 name = "jh-prompt-gen"
-version = "0.1.0"
+version = "1.0.1"
 description = "A small toolkit to collect code from local directories and automatically generate ChatGPT prompts."
 readme = "README.md"
 requires-python = ">=3.7"
@@ -24,11 +24,11 @@ classifiers = [
   "Topic :: Software Development :: Code Generators"
 ]
 
+dynamic = ["dependencies"]
+
 [project.urls]
 GitHub     = "https://github.com/Dev-CorliJoni/jh-prompt-gen"
 Instagram  = "https://www.instagram.com/dev.corlijoni/"
-
-dynamic = ["dependencies"]
 
 [tool.setuptools]
 py-modules = ["jh_copy_clipboard", "jh_gen_prompt"]

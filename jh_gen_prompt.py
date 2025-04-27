@@ -117,7 +117,7 @@ def main() -> None:
     pattern = pattern or default
 
     # Capture code
-    cmd = ['jh_copy_clipboard.py', '--return', args.path]
+    cmd = ['jh-copy-clipboard', '--return', args.path]
     if args.ignore_file:
         cmd += ['-I', args.ignore_file]
     for pat in args.ignore:
